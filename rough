@@ -1,0 +1,19 @@
+chats
+    userid
+        chatid
+            chatid
+            org
+            dest
+            type
+            data
+            time
+            ...
+indexlist
+    userid
+        userid1
+            go : true
+        userid2
+            go : true
+
+
+
