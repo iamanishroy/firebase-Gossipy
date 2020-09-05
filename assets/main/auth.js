@@ -2,11 +2,11 @@ firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         var user = firebase.auth().currentUser;
         if (user != null) {
-            var userId = user.uid;
+            userId = user.uid;
             var userName = user.displayName;
             var userimg = user.photoURL;
-            // setInterval(loadIndex, 600);
-            loadIndex()
+            setInterval(loadIndex, 1000);
+            // loadIndex()
         }
     } else {
         window.location.replace("authentication/index.html");

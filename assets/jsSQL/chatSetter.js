@@ -1,7 +1,6 @@
 var db = openDatabase("itemDB", "1.0", "itemDB", 65535);
 var lastChat;
 function loadIndex() {
-    console.log("loadIndex")
     db.transaction(function (transaction) {
         var sql = "SELECT * FROM items ORDER BY rowid DESC";
         transaction.executeSql(sql, undefined, function (transaction, result) {
@@ -10,12 +9,18 @@ function loadIndex() {
                 let listed = new Array();
                 for (var i = 0; i < result.rows.length; i++) {
                     var row = result.rows.item(i);
-                    var dbimage = row.image;
-                    var dbname = row.name;
                     var dborigin = row.origin;
                     var dbdestination = row.destination;
+                    var database = firebase.database();
                     if (userId == dbdestination && !(listed.includes(dborigin))) {
                         listed.push(dborigin);
+                        var dbname, dbimage;
+                        database.ref('users/' + dborigin).on('value', function (snapshot) {
+                            if (snapshot.exists()) {
+                                dbname = snapshot.val().name;
+                                dbimage = snapshot.val().image;
+                            }
+                        });
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
                                 onclick="javascript:chatWith('${dbname}','${i}','${dbimage}','Offline','${dborigin}')">
@@ -35,6 +40,13 @@ function loadIndex() {
                     }
                     if (userId == dborigin && !(listed.includes(dbdestination))) {
                         listed.push(dbdestination);
+                        var dbname, dbimage;
+                        database.ref('users/' + dbdestination).on('value', function (snapshot) {
+                            if (snapshot.exists()) {
+                                dbname = snapshot.val().name;
+                                dbimage = snapshot.val().image;
+                            }
+                        });
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
                                 onclick="javascript:chatWith('${dbname}','1','${dbimage}','Offline','${dbdestination}')">

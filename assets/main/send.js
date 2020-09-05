@@ -1,20 +1,25 @@
-function send(val) {
+function send(rec, typ, val) {
     var database = firebase.database();
     var user = firebase.auth().currentUser;
     var now = +new Date();
     var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
-    insert(uniqId + "", user.uid + "", 'dest' + "", '1', val + "", now + "");
+    insert(uniqId + "", user.uid + "", rec, typ, val + "", now + "");
     // if (sSwitch) {
     //     sentmp3.play();
     // }
+    // "https://cors-anywhere.herokuapp.com/http://pushmessage.epizy.com/pusher/pusher.php"
     $.ajax({
         url: "https://gossipx-server-1.ml/pusher/pusher.php",
         type: "POST",
-        data: { uniqId: uniqId, to: curId, org: userId, type: 1, message: val, time: now },
+        data: { uniqId: uniqId, to: rec, org: user.uid, type: typ, message: val, time: now },
         success: function (data) {
             database.ref('chats/' + user.uid + '/' + uniqId).set({
-                uniqId: uniqId, org: 'gossipy', dest: user.uid, type: 1, data: val, time: now
+                uniqId: uniqId, org: user.uid, dest: rec, type: typ, data: val, time: now
+            });
+            database.ref('chats/' + rec + '/' + uniqId).set({
+                uniqId: uniqId, org: user.uid, dest: rec, type: typ, data: val, time: now
             });
         }
     });
+    loadIndex();
 }

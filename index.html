@@ -11,11 +11,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
-
-    <script src="assets/main/fbconfig.js"></script>
-    <script src="assets/main/auth.js"></script>
-    <script src="assets/main/send.js"></script>
-
     <link href="assets/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/assets/css/animate.css" rel="stylesheet">
     <link href="assets/assets/css/custom.css" rel="stylesheet" id="style">
@@ -199,9 +194,8 @@
                             <header class="wchat-header wchat-chat-header top">
                                 <div class="chat-avatar">
                                     <div class="avatar icon-user-default" style="height: 40px; width: 40px;">
-                                        <div class="avatar-body userimage"><img id="userImgChanged"
-                                                src="" class="avatar-image is-loaded"
-                                                width="100%"></div>
+                                        <div class="avatar-body userimage"><img id="userImgChanged" src=""
+                                                class="avatar-image is-loaded" width="100%"></div>
                                     </div>
 
                                 </div>
@@ -6044,8 +6038,7 @@
                         <div class="roww fda_section_row">
                             <div class="section_product_tile">
                                 <div class="justify-content-center align-self-center">
-                                    <img src="image" onclick="triggerInp()" id="imgTrigger"
-                                        alt="">
+                                    <img src="image" onclick="triggerInp()" id="imgTrigger" alt="">
                                     <input type="file" style="display: none;" name="upload_image" id="upload_image"
                                         accept="image/*">
                                 </div>
@@ -6060,8 +6053,7 @@
                         <div class="p-2 w-full">
                             <textarea
                                 class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none h-32 focus:border-red-500 text-base px-4 py-2 resize-none block"
-                                id="status" style="font-size: 1.55rem;"
-                                placeholder="Status">status</textarea>
+                                id="status" style="font-size: 1.55rem;" placeholder="Status">status</textarea>
                         </div>
                         <br><br>
                         <div class="container mx-auto flex px-5 py-4 items-center justify-center flex-col">
@@ -6171,10 +6163,13 @@
     <!-- jQuery -->
     <script src="assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="assets/jsSQL/chatSetter.js"></script>
+    <script src="assets/main/fbconfig.js"></script>
+    <script src="assets/main/auth.js"></script>
     <script type="text/javascript" src="assets/main/fetch.js"></script>
     <script type="text/javascript" src="assets/jsSQL/chatBoxSetter.js"></script>
+    
     <script>
-        const userId = "id";
+        var userId = '';
         var username = "<?php echo $row['name']; ?>";
         var Ses_img = "<?php echo $row['image']; ?>";
         var status = `<?php echo $row['status']; ?>`;
@@ -6266,6 +6261,7 @@
     <script type="text/javascript" src="assets/jsSQL/chatSetter.js"></script>
     <script type="text/javascript" src="assets/jsSQL/reciever.js"></script>
     <script type="text/javascript" src="assets/chatjs/lightbox.js"></script>
+    <script src="assets/main/send.js"></script>
     <script type="text/javascript" src="assets/chatjs/inbox1.js"></script>
     <script type="text/javascript" src="assets/chatjs/custom1.js"></script>
     <script type="text/javascript" src="assets/assets/js/croppie.min.js"></script>
