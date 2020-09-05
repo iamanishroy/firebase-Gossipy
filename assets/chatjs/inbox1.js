@@ -71,73 +71,73 @@ function createChatBox(chatboxtitle, toid, img, status, minimizeChatBox) {
     }
 }
 
-// function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, send) {
+function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, send) {
 
-//     $(".input-placeholder").css({ 'visibility': 'hidden' });
+    $(".input-placeholder").css({ 'visibility': 'hidden' });
 
-//     if ((event.keyCode == 13 && event.shiftKey == 0) || (send == 1)) {
-//         message = $(chatboxtextarea).val();
-//         message = message.replace(/^\s+|\s+$/g, "");
+    if ((event.keyCode == 13 && event.shiftKey == 0) || (send == 1)) {
+        message = $(chatboxtextarea).val();
+        message = message.replace(/^\s+|\s+$/g, "");
 
-//         $(chatboxtextarea).val('');
-//         $(chatboxtextarea).focus();
-//         $(".input-placeholder").css({ 'visibility': 'visible' });
-//         $(".chatboxtextarea").css('height', '20px');
-//         if (message != '') {
-//             message = message.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
-//             message = message.replace(/\n/g, "<br />");
-//             var $con = message;
-//             var $words = $con.split(' ');
-//             for (i in $words) {
-//                 if ($words[i].indexOf('http://') == 0 || $words[i].indexOf('https://') == 0) {
-//                     $words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
-//                 }
-//                 else if ($words[i].indexOf('www') == 0) {
-//                     $words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
-//                 }
-//             }
-//             message = $words.join(' ');
-//             message = emojione.shortnameToImage(message); // Set imotions
-//             $("#chatbox_" + chatboxtitle).append('<div class="col-xs-12 p-b-10 odd">' +
-//                 '<div class="chat-image  profile-picture max-profile-picture">' +
-//                 '<img alt="' + username + '" src="' + Ses_img + '">' +
-//                 '</div>' +
-//                 '<div class="chat-body">' +
-//                 '<div class="chat-text">' +
-//                 '<h4>' + username + '</h4>' +
-//                 '<p>' + message + '</p>' +
-//                 '<b>Just Now</b><span class="msg-status msg-' + chatboxtitle + '"><i class="fa fa-check"></i></span>' +
-//                 '</div>' +
-//                 '</div>' +
-//                 '</div>');
+        $(chatboxtextarea).val('');
+        $(chatboxtextarea).focus();
+        $(".input-placeholder").css({ 'visibility': 'visible' });
+        $(".chatboxtextarea").css('height', '20px');
+        if (message != '') {
+            message = message.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
+            message = message.replace(/\n/g, "<br />");
+            var $con = message;
+            var $words = $con.split(' ');
+            for (i in $words) {
+                if ($words[i].indexOf('http://') == 0 || $words[i].indexOf('https://') == 0) {
+                    $words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
+                }
+                else if ($words[i].indexOf('www') == 0) {
+                    $words[i] = '<a href="' + $words[i] + '">' + $words[i] + '</a>';
+                }
+            }
+            message = $words.join(' ');
+            message = emojione.shortnameToImage(message); // Set imotions
+            $("#chatbox_" + chatboxtitle).append('<div class="col-xs-12 p-b-10 odd">' +
+                '<div class="chat-image  profile-picture max-profile-picture">' +
+                '<img alt="' + username + '" src="' + Ses_img + '">' +
+                '</div>' +
+                '<div class="chat-body">' +
+                '<div class="chat-text">' +
+                '<h4>' + username + '</h4>' +
+                '<p>' + message + '</p>' +
+                '<b>Just Now</b><span class="msg-status msg-' + chatboxtitle + '"><i class="fa fa-check"></i></span>' +
+                '</div>' +
+                '</div>' +
+                '</div>');
 
-//             $(".target-emoji").css({ 'display': 'none' });
-//             $('.wchat-filler').css({ 'height': 0 + 'px' });
-//             scrollDown();
-//             console.log(curId)
-//             console.log(message)
+            $(".target-emoji").css({ 'display': 'none' });
+            $('.wchat-filler').css({ 'height': 0 + 'px' });
+            scrollDown();
+            console.log(curId)
+            console.log(message)
     
-//             send(curId, 1, message);
-//         }
+            send(curId, 1, message);
+        }
 
-//         return false;
-//     }
+        return false;
+    }
 
-//     var adjustedHeight = chatboxtextarea.clientHeight;
-//     var maxHeight = 60;
+    var adjustedHeight = chatboxtextarea.clientHeight;
+    var maxHeight = 60;
 
-//     if (maxHeight > adjustedHeight) {
-//         adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
+    if (maxHeight > adjustedHeight) {
+        adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
 
-//         if (maxHeight)
-//             adjustedHeight = Math.min(maxHeight, adjustedHeight);
-//         if (adjustedHeight > chatboxtextarea.clientHeight)
-//             $(chatboxtextarea).css('height', adjustedHeight + 8 + 'px');
-//     } else {
-//         $(chatboxtextarea).css('overflow', 'auto');
-//     }
+        if (maxHeight)
+            adjustedHeight = Math.min(maxHeight, adjustedHeight);
+        if (adjustedHeight > chatboxtextarea.clientHeight)
+            $(chatboxtextarea).css('height', adjustedHeight + 8 + 'px');
+    } else {
+        $(chatboxtextarea).css('overflow', 'auto');
+    }
 
-// }
+}
 
 function clickTosendMessage(chatboxtitle, toid, img) {
 
@@ -200,20 +200,44 @@ function clickTosendMessage(chatboxtitle, toid, img) {
     }
     return false;
 }
-
-function sendToBackend(msg, dest, time) {
+function send(rec, typ, val) {
+    var database = firebase.database();
+    var user = firebase.auth().currentUser;
+    var now = +new Date();
+    var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
+    insert(uniqId + "", user.uid + "", rec, typ, val + "", now + "");
+    // if (sSwitch) {
+    //     sentmp3.play();
+    // }
+    // "https://cors-anywhere.herokuapp.com/http://pushmessage.epizy.com/pusher/pusher.php"
     $.ajax({
-        url: 'backEnd/sender.php',
-        type: 'POST',
-        data: { org: userId, dest: dest, kind: '1', msg: msg, time: time },
-        success: function (data) { }
-    });
-}
-function sendToReciever(Ses_img, username, curId, userId, type, message, curTime) {
-    $.ajax({
-        url: "backEnd/pusher.php",
+        url: "https://gossipx-server-1.ml/pusher/pusher.php",
         type: "POST",
-        data: { img: Ses_img, name: username, to: curId, org: userId, type: type, message: message, time: curTime },
-        success: function (data) { }
+        data: { uniqId: uniqId, to: rec, org: user.uid, type: typ, message: val, time: now },
+        success: function (data) {
+            database.ref('chats/' + user.uid + '/' + uniqId).set({
+                uniqId: uniqId, org: user.uid, dest: rec, type: typ, data: val, time: now
+            });
+            database.ref('chats/' + rec + '/' + uniqId).set({
+                uniqId: uniqId, org: user.uid, dest: rec, type: typ, data: val, time: now
+            });
+        }
     });
+    loadIndex();
 }
+// function sendToBackend(msg, dest, time) {
+//     $.ajax({
+//         url: 'backEnd/sender.php',
+//         type: 'POST',
+//         data: { org: userId, dest: dest, kind: '1', msg: msg, time: time },
+//         success: function (data) { }
+//     });
+// }
+// function sendToReciever(Ses_img, username, curId, userId, type, message, curTime) {
+//     $.ajax({
+//         url: "backEnd/pusher.php",
+//         type: "POST",
+//         data: { img: Ses_img, name: username, to: curId, org: userId, type: type, message: message, time: curTime },
+//         success: function (data) { }
+//     });
+// }

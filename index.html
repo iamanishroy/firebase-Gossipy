@@ -6038,7 +6038,7 @@
                         <div class="roww fda_section_row">
                             <div class="section_product_tile">
                                 <div class="justify-content-center align-self-center">
-                                    <img src="image" onclick="triggerInp()" id="imgTrigger" alt="">
+                                    <img src="" onclick="triggerInp()" id="imgTrigger" alt="">
                                     <input type="file" style="display: none;" name="upload_image" id="upload_image"
                                         accept="image/*">
                                 </div>
@@ -6152,7 +6152,7 @@
             <img src="assets/plugins/images/close-icon-white.png" width="30px" style="cursor: pointer" />
         </p>
         <div id="content">
-            <img src="#" />
+            <img src="" />
         </div>
     </div>
     <!--Toast-->
@@ -6161,15 +6161,17 @@
     </div>
     <!--This div for modal light box chat box image-->
     <!-- jQuery -->
+    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+
     <script src="assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="assets/jsSQL/chatSetter.js"></script>
     <script src="assets/main/fbconfig.js"></script>
-    <script src="assets/main/auth.js"></script>
+    <script src="assets/main/auth.js" defer></script>
     <script type="text/javascript" src="assets/main/fetch.js"></script>
     <script type="text/javascript" src="assets/jsSQL/chatBoxSetter.js"></script>
     
     <script>
-        var userId = '';
+        // var userId = '';
         var username = "<?php echo $row['name']; ?>";
         var Ses_img = "<?php echo $row['image']; ?>";
         var status = `<?php echo $row['status']; ?>`;
@@ -6257,9 +6259,8 @@
     <script src="assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
     <!--Style Switcher -->
     <!--ChatJs -->
-    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
     <script type="text/javascript" src="assets/jsSQL/chatSetter.js"></script>
-    <script type="text/javascript" src="assets/jsSQL/reciever.js"></script>
+    <!-- <script type="text/javascript" src="assets/jsSQL/reciever.js" defer></script> -->
     <script type="text/javascript" src="assets/chatjs/lightbox.js"></script>
     <script src="assets/main/send.js"></script>
     <script type="text/javascript" src="assets/chatjs/inbox1.js"></script>

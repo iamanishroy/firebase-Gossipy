@@ -7,8 +7,7 @@ function fillTable() {
                 snapshot.forEach(function (childSnapshot) {
                     insert(childSnapshot.val().uniqId + "", childSnapshot.val().org + "", childSnapshot.val().dest + "", childSnapshot.val().type + "", childSnapshot.val().data + "", childSnapshot.val().time + "");
                 });
-            });
-            // loadIndex();
+            });            
         }, function (transaction, err) {
             console.log(err);
         });
