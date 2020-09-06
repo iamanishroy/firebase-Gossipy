@@ -27,8 +27,6 @@ function loadIndex() {
                             dbname = JSON.parse(localStorage.getItem(dborigin))[0];
                             dbimage = JSON.parse(localStorage.getItem(dborigin))[1];
                         }
-                        console.log(dbname)
-
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
                                 onclick="javascript:chatWith('${dbname}','${i}','${dbimage}','Offline','${dborigin}')">
@@ -62,7 +60,6 @@ function loadIndex() {
                             dbname = JSON.parse(localStorage.getItem(dbdestination))[0];
                             dbimage = JSON.parse(localStorage.getItem(dbdestination))[1];
                         }
-                        console.log(dbname)
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
                                 onclick="javascript:chatWith('${dbname}','1','${dbimage}','Offline','${dbdestination}')">
@@ -95,7 +92,7 @@ function loadIndex() {
                     "time DATETIME NOT NULL)";
                 transaction.executeSql(sql, undefined, function () {
                     fillTable();
-                    setTimeout(setInterval(loadIndex, 1000), 1000);
+                    setInterval(loadIndex, 2000);
                 });
             });
         })
