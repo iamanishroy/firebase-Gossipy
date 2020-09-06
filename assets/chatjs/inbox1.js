@@ -1,7 +1,7 @@
 var audioogg = new Audio('assets/audio/chat.ogg');
 var audiomp3 = new Audio('assets/audio/chat.mp3');
-var sentogg = new Audio('assets/assets/audio/sent.ogg');
-var sentmp3 = new Audio('assets/assets/audio/sent.mp3');
+var sentogg = new Audio('assets/audio/sent.ogg');
+var sentmp3 = new Audio('assets/audio/sent.mp3');
 function scrollDown() {
     var wtf = $('.wchat-chat-body');
     var height = wtf[0].scrollHeight;
@@ -13,7 +13,7 @@ var curImg;
 var curName;
 var curNo;
 var h = 0;
-function chatWith(chatuser, toid, img, status, chatuserId) {
+function chatWith(chatuser, toid, img, status, chatuserId, mail, stat) {
     curId = chatuserId;
     curImg = img;
     curName = chatuser;
@@ -29,7 +29,8 @@ function chatWith(chatuser, toid, img, status, chatuserId) {
     scrollDown();
     $('.right .top').attr("data-user", chatuser)
         .attr("data-image", img)
-        .attr("data-id", chatuserId);
+        .attr("data-mail", mail)
+        .attr("data-stat", stat);
 }
 function createChatBox(chatboxtitle, toid, img, status, minimizeChatBox) {
     var chatFormTpl =

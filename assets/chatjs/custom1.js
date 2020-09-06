@@ -21,7 +21,9 @@ $(document).ready(function() {
         var usname = $(this).find('img').attr('alt');
         var usname = $('.right .top').attr("data-user");
         var img = $('.right .top').attr("data-image");
-        var id = $('.right .top').attr("data-id");
+        var id = $('.right .top').attr("data-mail");
+        var stat = $('.right .top').attr("data-stat");
+
 
         $('#wchat .wchat').removeClass('two');
         $('#wchat .wchat').addClass('three');
@@ -37,21 +39,19 @@ $(document).ready(function() {
             '<h5 class="text-white">'+id+'</h5>' +
             '</div>' +
             '</div>' +
-            '</div>';
-//  +
-//         '<div class="user-btm-box">' +
-//         '<div class="row text-center m-t-10">' +
-//         '<div class="col-md-6 b-r"><strong>Name</strong><p>'+usname+'</p></div>' +
-//         '<div class="col-md-6"><strong>Gender</strong><p>male</p></div>' +
-//         '</div>' +
-//         '<hr>' +
-//         '<div class="row text-center m-t-10">' +
-//         '<div class="col-md-12"><strong>Status</strong><p> I Love You <3 </p></div>' +
-//         '</div>' +
-//         '<hr>' +
-//         '<div class="col-md-1 col-sm-1 text-center">&nbsp;</div>' +
-//         '</div>' +
-//         '</div>'
+            '</div>' +
+            // `<p style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); font-size: 2rem; font-weight: 500;">${stat}</p>`+
+        '<div class="user-btm-box">' +
+        '<div class="row text-center m-t-10">' +
+        '</div>' +
+        '<hr>' +
+        '<div class="row text-center m-t-10">' +
+        '<div class="col-md-12"><strong>Status</strong><p style="margin: 20px;">' + stat + '</p></div>' +
+        '</div>' +
+        '<hr>' +
+        '<div class="col-md-1 col-sm-1 text-center">&nbsp;</div>' +
+        '</div>' +
+        '</div>'
         $("#userProfile").html(profileTpl);
     });
 

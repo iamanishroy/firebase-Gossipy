@@ -20,16 +20,20 @@ function loadIndex() {
                                 if (snapshot.exists()) {
                                     dbname = snapshot.val().name;
                                     dbimage = snapshot.val().image;
-                                    localStorage.setItem(dborigin, JSON.stringify([snapshot.val().name, snapshot.val().image]));
+                                    dbemail = snapshot.val().email;
+                                    dbstatus = snapshot.val().status;
+                                    localStorage.setItem(dborigin, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
                                 }
                             });
                         } else {
                             dbname = JSON.parse(localStorage.getItem(dborigin))[0];
                             dbimage = JSON.parse(localStorage.getItem(dborigin))[1];
+                            dbemail = JSON.parse(localStorage.getItem(dborigin))[2];
+                            dbstatus = JSON.parse(localStorage.getItem(dborigin))[3];
                         }
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
-                                onclick="javascript:chatWith('${dbname}','${i}','${dbimage}','Offline','${dborigin}')">
+                                onclick="javascript:chatWith('${dbname}','${i}','${dbimage}','Offline','${dborigin}','${dbemail}','${dbstatus}')">
                                 <a href="javascript:void(0)">
                                     <span class="userimage profile-picture min-profile-picture"><img
                                             src="${dbimage}" alt="${dbname}"
@@ -52,17 +56,21 @@ function loadIndex() {
                                 if (snapshot.exists()) {
                                     dbname = snapshot.val().name;
                                     dbimage = snapshot.val().image;
-                                    localStorage.setItem(dbdestination, JSON.stringify([snapshot.val().name, snapshot.val().image]));
+                                    dbemail = snapshot.val().email;
+                                    dbstatus = snapshot.val().status;
+                                    localStorage.setItem(dbdestination, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
                                 }
                             });
 
                         } else {
                             dbname = JSON.parse(localStorage.getItem(dbdestination))[0];
                             dbimage = JSON.parse(localStorage.getItem(dbdestination))[1];
+                            dbemail = JSON.parse(localStorage.getItem(dbdestination))[2];
+                            dbstatus = JSON.parse(localStorage.getItem(dbdestination))[3];
                         }
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
-                                onclick="javascript:chatWith('${dbname}','1','${dbimage}','Offline','${dbdestination}')">
+                                onclick="javascript:chatWith('${dbname}','1','${dbimage}','Offline','${dbdestination}','${dbemail}','${dbstatus}')">
                                 <a href="javascript:void(0)">
                                     <span class="userimage profile-picture min-profile-picture"><img
                                             src="${dbimage}" alt="${dbname}"
