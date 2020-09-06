@@ -33,8 +33,6 @@ $(document).ready(function () {
       reader.onload = function (event) {
          $image_crop.croppie('bind', {
             url: event.target.result
-         }).then(function () {
-            console.log('jQuery bind complete');
          });
       }
       reader.readAsDataURL(this.files[0]);
@@ -50,6 +48,7 @@ $(document).ready(function () {
          $('.crop_image').hide();
          $('.crop_image_cancel').hide();
          $('#imgLoading').show();
+         var user = firebase.auth().currentUser;
          const ref = firebase.storage().ref();
          // extract content type and base64 payload from original string
          var pos = str.indexOf(';base64,');
@@ -66,7 +65,6 @@ $(document).ready(function () {
          }
          // convert ArrayBuffer to Blob           
          const file = new Blob([buffer], { type: type });//.files[0];
-         console.log(file);
          const name = +new Date() + "-" + file.name;
          const metadata = {
             contentType: file.type
@@ -77,11 +75,10 @@ $(document).ready(function () {
                userimg = url;
                $('#imgTrigger').attr('src', url);
                $('#userImgChanged').attr('src', url);
-               console.log(url)
                user.updateProfile({
                   photoURL: url
                }).then(function () {
-                  database.ref('users/' + user.uid).update({
+                  firebase.database().ref('users/' + user.uid).update({
                      image: url
                   });
                }).catch(function (error) { });
