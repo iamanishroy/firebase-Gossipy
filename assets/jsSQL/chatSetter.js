@@ -126,7 +126,7 @@ function insert(chatId, origin, destination, type, data, time) {
         var sql = "INSERT INTO items(chatId, origin, destination, type, data, time) VALUES(?,?,?,?,?,?)";
         transaction.executeSql(sql, [chatId, origin, destination, type, data, time], function () { },
             function (transaction, err) {
-                console.log(err)
+                // console.log(err)
             });
     });
 }

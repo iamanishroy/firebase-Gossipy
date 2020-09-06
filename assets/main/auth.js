@@ -1,4 +1,4 @@
-var userName, userId, userimg;
+var userName, userId, userimg, status;
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         var user = firebase.auth().currentUser;
@@ -9,6 +9,13 @@ firebase.auth().onAuthStateChanged(function (user) {
             $('#userImgChanged').attr('src', userimg);
             $('.personName').text(userName);
             setter();
+            $('#imgTrigger').attr('src', userimg);            
+            $('#name').text(userName);
+            $('#userCode').text(user.email);
+            firebase.database().ref('users/' + user.uid).on('value', function (snapshot) {
+                status = snapshot.val()['status'];
+                $('#status').text(status);
+            });
             Pusher.logToConsole = false;
             var pusher = new Pusher('fe3a74428b31c6007138', {
                 cluster: 'ap2'

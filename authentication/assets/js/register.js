@@ -12,7 +12,7 @@ function signUp() {
                 promise.then(t => {
                     var user = firebase.auth().currentUser;
                     database.ref('users/' + user.uid).set({
-                        id: user.uid , email: email, name: email.split('@')[0], image: 'assets/assets/images/user2.png', status: '' 
+                        id: user.uid , fl: email.charAt(0).toLowerCase(), email: email, name: email.split('@')[0], image: 'assets/assets/images/user2.png', status: '' 
                     });
                     user.updateProfile({
                         displayName: email.split('@')[0],

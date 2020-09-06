@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
     <link href="assets/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/assets/css/animate.css" rel="stylesheet">
     <link href="assets/assets/css/custom.css" rel="stylesheet" id="style">
@@ -95,8 +96,8 @@
 
         .noti .cl {
             position: absolute;
-            top: 40%;
-            left: 65%;
+            top: 30%;
+            left: 80%;
             transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
             margin-top: 6px;
@@ -212,9 +213,9 @@
                                                     class="font-19"><i
                                                         class="icon icon-options-vertical"></i></span></button>
                                             <ul class="dropdown-menu dropdown-user animated flipInY">
-                                                <li id="userEditBtn"><a href="#"><i class="ti-user"></i> My Profile</a>
+                                                <li id="userEditBtn"><a><i class="ti-user"></i> My Profile</a>
                                                 </li>
-                                                <li id="userFindBtn"><a href="#"><i class="ti-search"></i> Find
+                                                <li id="userFindBtn"><a><i class="ti-search"></i> Find
                                                         People</a></li>
                                                 <li role="separator" class="divider"></li>
                                                 <li><a onclick="logout()"><i class="fa fa-power-off"></i>
@@ -6043,8 +6044,8 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 id="name">name</h4>
-                        <h5 id="userCode">code</h5>
+                        <h4 id="name" onclick="changeName()"></h4>
+                        <h5 id="userCode"></h5>
                     </section>
                 </div>
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
@@ -6052,7 +6053,7 @@
                         <div class="p-2 w-full">
                             <textarea
                                 class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none h-32 focus:border-red-500 text-base px-4 py-2 resize-none block"
-                                id="status" style="font-size: 1.55rem;" placeholder="Status">status</textarea>
+                                id="status" style="font-size: 1.55rem;" placeholder="Status"></textarea>
                         </div>
                         <br><br>
                         <div class="container mx-auto flex px-5 py-4 items-center justify-center flex-col">
@@ -6099,7 +6100,7 @@
             <div class="flex items-center border-b border-b-2 border-red-500 py-2">
                 <input id="searchbox"
                     class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                    type="text" placeholder="Search with UserID or Name" aria-label="Full name">
+                    type="text" autocomplete="off" placeholder="Search with UserID or Name" aria-label="Full name">
             </div>
         </form>
         <section class="text-gray-700 body-font">
@@ -6120,7 +6121,6 @@
                 </label>
                 <ul>
                     <li><b>Layout Options</b></li>
-
                 </ul>
                 <ul id="mainthemecolors" class="m-t-20">
                     <li><b>Theme (Light/Dark)</b></li>
@@ -6158,23 +6158,7 @@
     <script src="assets/main/auth.js" defer></script>
     <script type="text/javascript" src="assets/main/fetch.js"></script>
     <script type="text/javascript" src="assets/jsSQL/chatBoxSetter.js"></script>
-    <script>
-        var status = `<?php echo $row['status']; ?>`;
-        function saveStatus() {
-            if ($('#status').val() != status) {
-                var curStatus = $('#status').val();
-                $.ajax({
-                    url: "backEnd/uploadStatus.php",
-                    type: "POST",
-                    data: { "status": curStatus, "uid": userId },
-                    success: function (data) {
-                        $('#status').attr('value', curStatus);
-                        $('#wchat').show();
-                        $('#userEdit').hide();
-                    }
-                });
-            }
-        }
+    <script>        
         var sSwitch = true;
         $('#soundToogle').click(function () {
             if (sSwitch) {
@@ -6202,38 +6186,9 @@
             $('#wchat').show();
             $('#findUser').hide();
         }
-
-        $('#searchbox').keyup(function () {
-            var val = $('#searchbox').val();
-            if (val != "") {
-                if (val.length == 1) {
-                    $.ajax({
-                        url: "backEnd/searchUser.php",
-                        type: "POST",
-                        data: { data: val, user: userId },
-                        success: function (data) {
-                            sUser = data.split('|');
-                            $('.searchList').html("");
-                            for (var i = 0; i < sUser.length; i += 2) {
-                                if ((sUser[i].toLowerCase()).includes('^' + val.toLowerCase())) {
-                                    $('.searchList').append(sUser[i + 1]);
-                                }
-                            }
-                        }
-                    });
-                } else {
-                    $('.searchList').html("");
-                    for (var i = 0; i < sUser.length; i += 2) {
-                        if ((sUser[i].toLowerCase()).includes('^' + val.toLowerCase())) {
-                            $('.searchList').append(sUser[i + 1]);
-                        }
-                    }
-                }
-            } else {
-                $('.searchList').html("");
-            }
-        });
     </script>
+    <script src="assets/helper/searchUser.js"></script>
+    <script src="assets/helper/saveUser.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="assets/assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
