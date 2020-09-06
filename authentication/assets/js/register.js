@@ -12,10 +12,11 @@ function signUp() {
                 promise.then(t => {
                     var user = firebase.auth().currentUser;
                     database.ref('users/' + user.uid).set({
-                        id: user.uid , name: '', image: 'user.png', status: '' 
+                        id: user.uid , email: email, name: email.split('@')[0], image: 'assets/assets/images/user2.png', status: '' 
                     });
                     user.updateProfile({
-                        photoURL: 'assets/images/user.jpg',
+                        displayName: email.split('@')[0],
+                        photoURL: 'assets/assets/images/user2.png',
                     }).then(function () {
                         var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
                         database.ref('chats/' + user.uid + '/' + uniqId).set({

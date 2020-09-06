@@ -1,7 +1,6 @@
 var db = openDatabase("itemDB", "1.0", "itemDB", 65535);
 var lastChat;
 function loadIndex() {
-    console.log('load Ind')
     db.transaction(function (transaction) {
         var sql = "SELECT * FROM items ORDER BY rowid DESC";
         transaction.executeSql(sql, undefined, function (transaction, result) {
@@ -16,7 +15,6 @@ function loadIndex() {
                     if (userId == dbdestination && !(listed.includes(dborigin))) {
                         listed.push(dborigin);
                         var dbname, dbimage;
-                        console.log(dborigin)
                         if (localStorage.getItem(dborigin) == null) {
                             database.ref('users/' + dborigin).on('value', function (snapshot) {
                                 if (snapshot.exists()) {
@@ -25,13 +23,9 @@ function loadIndex() {
                                     localStorage.setItem(dborigin, JSON.stringify([snapshot.val().name, snapshot.val().image]));
                                 }
                             });
-                            console.log('iffing1')
-
                         } else {
                             dbname = JSON.parse(localStorage.getItem(dborigin))[0];
                             dbimage = JSON.parse(localStorage.getItem(dborigin))[1];
-                            console.log('elsing')
-
                         }
                         console.log(dbname)
 
@@ -55,22 +49,18 @@ function loadIndex() {
                     if (userId == dborigin && !(listed.includes(dbdestination))) {
                         listed.push(dbdestination);
                         var dbname, dbimage;
-                        console.log(dbdestination)
                         if (localStorage.getItem(dbdestination) == null) {
                             database.ref('users/' + dbdestination).on('value', function (snapshot) {
                                 if (snapshot.exists()) {
                                     dbname = snapshot.val().name;
                                     dbimage = snapshot.val().image;
                                     localStorage.setItem(dbdestination, JSON.stringify([snapshot.val().name, snapshot.val().image]));
-                                    console.log(dbdestination + '?')
                                 }
                             });
-                            console.log('iffing')
 
                         } else {
                             dbname = JSON.parse(localStorage.getItem(dbdestination))[0];
                             dbimage = JSON.parse(localStorage.getItem(dbdestination))[1];
-                            console.log('elsing')
                         }
                         console.log(dbname)
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
@@ -91,8 +81,9 @@ function loadIndex() {
                         $(".clist").append(htm);
                     }
                 }
+            } else {
+                deletee();
             }
-
         }, function (transaction, err) {
             db.transaction(function (transaction) {
                 var sql = "CREATE TABLE items " +
@@ -105,11 +96,24 @@ function loadIndex() {
                 transaction.executeSql(sql, undefined, function () {
                     fillTable();
                     setTimeout(setInterval(loadIndex, 1000), 1000);
-
                 });
             });
         })
     })
+}
+function setter() {
+    deletee();
+}
+function deletee() {
+    db.transaction(function (transaction) {
+        var sql = "DROP TABLE items";
+        transaction.executeSql(sql, undefined, function () {
+            loadIndex();
+        },
+            function (transaction, err) {
+                loadIndex();
+            })
+    });
 }
 function insert(chatId, origin, destination, type, data, time) {
     //lastChat = chatId;

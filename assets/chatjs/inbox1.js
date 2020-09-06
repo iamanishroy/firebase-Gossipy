@@ -100,11 +100,11 @@ function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, s
             message = emojione.shortnameToImage(message); // Set imotions
             $("#chatbox_" + chatboxtitle).append('<div class="col-xs-12 p-b-10 odd">' +
                 '<div class="chat-image  profile-picture max-profile-picture">' +
-                '<img alt="' + username + '" src="' + Ses_img + '">' +
+                '<img alt="' + userName + '" src="' + userimg + '">' +
                 '</div>' +
                 '<div class="chat-body">' +
                 '<div class="chat-text">' +
-                '<h4>' + username + '</h4>' +
+                '<h4>' + userName + '</h4>' +
                 '<p>' + message + '</p>' +
                 '<b>Just Now</b><span class="msg-status msg-' + chatboxtitle + '"><i class="fa fa-check"></i></span>' +
                 '</div>' +
@@ -168,11 +168,11 @@ function clickTosendMessage(chatboxtitle, toid, img) {
 
         $("#chatbox_" + chatboxtitle).append('<div class="col-xs-12 p-b-10 odd">' +
             '<div class="chat-image  profile-picture max-profile-picture">' +
-            '<img alt="' + username + '" src="' + Ses_img + '">' +
+            '<img alt="' + userName + '" src="' + userimg + '">' +
             '</div>' +
             '<div class="chat-body">' +
             '<div class="chat-text">' +
-            '<h4>' + username + '</h4>' +
+            '<h4>You</h4>' +
             '<p>' + message + '</p>' +
             '<b>Just Now</b><span class="msg-status msg-' + chatboxtitle + '"><i class="fa fa-check"></i></span>' +
             '</div>' +
@@ -233,11 +233,11 @@ function send(rec, typ, val) {
 //         success: function (data) { }
 //     });
 // }
-// function sendToReciever(Ses_img, username, curId, userId, type, message, curTime) {
+// function sendToReciever(userimg, userName, curId, userId, type, message, curTime) {
 //     $.ajax({
 //         url: "backEnd/pusher.php",
 //         type: "POST",
-//         data: { img: Ses_img, name: username, to: curId, org: userId, type: type, message: message, time: curTime },
+//         data: { img: userimg, name: userName, to: curId, org: userId, type: type, message: message, time: curTime },
 //         success: function (data) { }
 //     });
 // }

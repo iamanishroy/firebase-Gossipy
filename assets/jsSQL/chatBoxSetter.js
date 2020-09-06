@@ -14,8 +14,8 @@ function boxSetter(name, sno, cid) {
                 var htm = `<div id="chatbox_${name}" class="chat chatboxcontent active-chat" data-chat="person_${sno}" client="${name}">`;
                 for (var i = 0; i < result.rows.length; i++) {
                     var row = result.rows.item(i);
-                    var dbimage = row.image;
-                    var dbname = row.name;
+                    var dbimage = JSON.parse(localStorage.getItem(cid))[1];
+                    var dbname = name;
                     var dborigin = row.origin;
                     var dbdata = row.data;
                     var dbdestination = row.destination;
@@ -51,7 +51,7 @@ function boxSetter(name, sno, cid) {
                     } else {
                         htm += `<div class="col-xs-12 p-b-10 odd">
                                     <div class="chat-image  profile-picture max-profile-picture">
-                                        <img alt="${username}" src="${Ses_img}">
+                                        <img alt="${userName}" src="${userimg}">
                                     </div>
                                     <div class="chat-body">
                                         <div class="chat-text">
