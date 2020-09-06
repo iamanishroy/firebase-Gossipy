@@ -15,21 +15,21 @@ function loadIndex() {
                     if (userId == dbdestination && !(listed.includes(dborigin))) {
                         listed.push(dborigin);
                         var dbname, dbimage;
-                        if (localStorage.getItem(dborigin) == null) {
+                        if (sessionStorage.getItem(dborigin) == null) {
                             database.ref('users/' + dborigin).on('value', function (snapshot) {
                                 if (snapshot.exists()) {
                                     dbname = snapshot.val().name;
                                     dbimage = snapshot.val().image;
                                     dbemail = snapshot.val().email;
                                     dbstatus = snapshot.val().status;
-                                    localStorage.setItem(dborigin, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
+                                    sessionStorage.setItem(dborigin, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
                                 }
                             });
                         } else {
-                            dbname = JSON.parse(localStorage.getItem(dborigin))[0];
-                            dbimage = JSON.parse(localStorage.getItem(dborigin))[1];
-                            dbemail = JSON.parse(localStorage.getItem(dborigin))[2];
-                            dbstatus = JSON.parse(localStorage.getItem(dborigin))[3];
+                            dbname = JSON.parse(sessionStorage.getItem(dborigin))[0];
+                            dbimage = JSON.parse(sessionStorage.getItem(dborigin))[1];
+                            dbemail = JSON.parse(sessionStorage.getItem(dborigin))[2];
+                            dbstatus = JSON.parse(sessionStorage.getItem(dborigin))[3];
                         }
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"
@@ -51,22 +51,22 @@ function loadIndex() {
                     if (userId == dborigin && !(listed.includes(dbdestination))) {
                         listed.push(dbdestination);
                         var dbname, dbimage;
-                        if (localStorage.getItem(dbdestination) == null) {
+                        if (sessionStorage.getItem(dbdestination) == null) {
                             database.ref('users/' + dbdestination).on('value', function (snapshot) {
                                 if (snapshot.exists()) {
                                     dbname = snapshot.val().name;
                                     dbimage = snapshot.val().image;
                                     dbemail = snapshot.val().email;
                                     dbstatus = snapshot.val().status;
-                                    localStorage.setItem(dbdestination, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
+                                    sessionStorage.setItem(dbdestination, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
                                 }
                             });
 
                         } else {
-                            dbname = JSON.parse(localStorage.getItem(dbdestination))[0];
-                            dbimage = JSON.parse(localStorage.getItem(dbdestination))[1];
-                            dbemail = JSON.parse(localStorage.getItem(dbdestination))[2];
-                            dbstatus = JSON.parse(localStorage.getItem(dbdestination))[3];
+                            dbname = JSON.parse(sessionStorage.getItem(dbdestination))[0];
+                            dbimage = JSON.parse(sessionStorage.getItem(dbdestination))[1];
+                            dbemail = JSON.parse(sessionStorage.getItem(dbdestination))[2];
+                            dbstatus = JSON.parse(sessionStorage.getItem(dbdestination))[3];
                         }
                         var htm = `<li class="person chatboxhead active" id="chatbox1_${dbname}" data-chat="person_${i}"
                                 href="javascript:void(0)"

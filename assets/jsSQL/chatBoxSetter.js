@@ -14,7 +14,7 @@ function boxSetter(name, sno, cid) {
                 var htm = `<div id="chatbox_${name}" class="chat chatboxcontent active-chat" data-chat="person_${sno}" client="${name}">`;
                 for (var i = 0; i < result.rows.length; i++) {
                     var row = result.rows.item(i);
-                    var dbimage = JSON.parse(localStorage.getItem(cid))[1];
+                    var dbimage = JSON.parse(sessionStorage.getItem(cid))[1];
                     var dbname = name;
                     var dborigin = row.origin;
                     var dbdata = row.data;
