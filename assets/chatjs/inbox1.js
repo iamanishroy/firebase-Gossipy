@@ -1,5 +1,5 @@
-var audioogg = new Audio('assets/assets/audio/chat.ogg');
-var audiomp3 = new Audio('assets/assets/audio/chat.mp3');
+var audioogg = new Audio('assets/audio/chat.ogg');
+var audiomp3 = new Audio('assets/audio/chat.mp3');
 var sentogg = new Audio('assets/assets/audio/sent.ogg');
 var sentmp3 = new Audio('assets/assets/audio/sent.mp3');
 function scrollDown() {
@@ -103,6 +103,9 @@ function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, s
             var now = +new Date();
             var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
             insert(uniqId + "", user.uid + "", curId, 1, message + "", now + "");
+            if (sSwitch) {
+                sentmp3.play();
+            }
             $.ajax({
                 url: "https://gossipx-server-1.ml/pusher/pusher.php",
                 type: "POST",
@@ -189,9 +192,9 @@ function send(rec, typ, val) {
     var now = +new Date();
     var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
     insert(uniqId + "", user.uid + "", rec, typ, val + "", now + "");
-    // if (sSwitch) {
-    //     sentmp3.play();
-    // }
+    if (sSwitch) {
+        sentmp3.play();
+    }
     // "https://cors-anywhere.herokuapp.com/http://pushmessage.epizy.com/pusher/pusher.php"
     $.ajax({
         url: "https://gossipx-server-1.ml/pusher/pusher.php",
