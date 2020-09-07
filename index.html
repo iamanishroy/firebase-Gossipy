@@ -263,7 +263,7 @@
                         <div class="chat-body">
                             <div class="chat-main">
                                 <h2 class="chat-title" dir="auto"><span
-                                        class="wchatellips personName curName">Alpha</span>
+                                        class="wchatellips personName curName"></span>
                                 </h2>
                             </div>
                             <div class="chat-status wchatellips" id="typing_on">
@@ -312,11 +312,11 @@
                                     <button class="icon dropdown-toggle" data-toggle="dropdown" href="#"><span
                                             class="font-19"><i class="icon icon-options-vertical"></i></span></button>
                                     <ul class="dropdown-menu dropdown-user animated flipInY">
-                                        <li><a href="javascript:void(0)" onclick="javascript:ShowProfile();"><i
+                                        <li><a onclick="javascript:ShowProfile();"><i
                                                     class="ti-user"></i> User Profile</a></li>
-                                        <li><a href="javascript:void(0)"><i class="ti-wallet"></i> Email This Chat</a>
+                                        <li><a onclick="EmailChat()""><i class="ti-wallet"></i> Email This Chat</a>
                                         </li>
-                                        <li><a href="javascript:void(0)"><i class="icon-doc"></i> Save Chat</a></li>
+                                        <li><a href="javascript:void(0)"><i class="icon-close"></i> Block User</a></li>
                                     </ul>
                                     <!-- /.dropdown-user -->
                                 </div>
@@ -6192,6 +6192,7 @@
     </script>
     <script src="assets/helper/searchUser.js"></script>
     <script src="assets/helper/saveUser.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="assets/assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
@@ -6200,6 +6201,8 @@
     <script src="assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
     <!--Style Switcher -->
     <!--ChatJs -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
     <script type="text/javascript" src="assets/jsSQL/chatSetter.js"></script>
     <!-- <script type="text/javascript" src="assets/jsSQL/reciever.js" defer></script> -->
     <script type="text/javascript" src="assets/chatjs/lightbox.js"></script>
@@ -6210,6 +6213,8 @@
     <script type="text/javascript" src="assets/assets/js/cropperScriptss.js"></script>
     <script src="assets/assets/js/toast.js"></script>
     <script src="assets/assets/js/searchUserHandler3.js"></script>
+    <script src="assets/helper/EmailChat.js"></script>
+
     <!--ChatJs-->
 
 </body>

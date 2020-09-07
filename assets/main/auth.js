@@ -1,4 +1,4 @@
-var userName, userId, userimg, status;
+var userName, userId, userimg, status, usEmail;
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         var user = firebase.auth().currentUser;
@@ -12,7 +12,8 @@ firebase.auth().onAuthStateChanged(function (user) {
             setter();
             $('#imgTrigger').attr('src', userimg);            
             $('#name').text(userName);
-            $('#userCode').text(user.email);
+            usEmail = user.email;
+            $('#userCode').text(usEmail);
             firebase.database().ref('users/' + user.uid).on('value', function (snapshot) {
                 status = snapshot.val()['status'];
                 $('#status').text(status);
