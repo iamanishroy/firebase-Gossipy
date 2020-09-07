@@ -1,9 +1,18 @@
 var db = openDatabase("itemDB", "1.0", "itemDB", 65535);
 var lastChat;
-function loadIndex() {
+var fetUsData = (usId) => {
+    return new Promise((resolve, reject) => {
+        firebase.database().ref('users/' + usId).on('value', function (snapshot) {
+            if (snapshot.exists()) {
+                resolve(snapshot);
+            }
+        });
+    });
+}
+async function loadIndex() {
     db.transaction(function (transaction) {
         var sql = "SELECT * FROM items ORDER BY rowid DESC";
-        transaction.executeSql(sql, undefined, function (transaction, result) {
+        transaction.executeSql(sql, undefined, async function (transaction, result) {
             if (result.rows.length) {
                 $(".clist").html("");
                 let listed = new Array();
@@ -11,20 +20,17 @@ function loadIndex() {
                     var row = result.rows.item(i);
                     var dborigin = row.origin;
                     var dbdestination = row.destination;
-                    var database = firebase.database();
                     if (userId == dbdestination && !(listed.includes(dborigin))) {
                         listed.push(dborigin);
-                        var dbname, dbimage;
+                        var dbname, dbimage, dbemail, dbstatus;
                         if (sessionStorage.getItem(dborigin) == null) {
-                            database.ref('users/' + dborigin).on('value', function (snapshot) {
-                                if (snapshot.exists()) {
-                                    dbname = snapshot.val().name;
-                                    dbimage = snapshot.val().image;
-                                    dbemail = snapshot.val().email;
-                                    dbstatus = snapshot.val().status;
-                                    sessionStorage.setItem(dborigin, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
-                                }
-                            });
+                            var snapshot = await fetUsData(dborigin);
+                            dbname = snapshot.val().name;
+                            dbimage = snapshot.val().image;
+                            dbemail = snapshot.val().email;
+                            dbstatus = snapshot.val().status;
+                            sessionStorage.setItem(dborigin, JSON.stringify([dbname, dbimage, dbemail, dbstatus]));
+
                         } else {
                             dbname = JSON.parse(sessionStorage.getItem(dborigin))[0];
                             dbimage = JSON.parse(sessionStorage.getItem(dborigin))[1];
@@ -50,18 +56,14 @@ function loadIndex() {
                     }
                     if (userId == dborigin && !(listed.includes(dbdestination))) {
                         listed.push(dbdestination);
-                        var dbname, dbimage;
+                        var dbname, dbimage, dbemail, dbstatus;
                         if (sessionStorage.getItem(dbdestination) == null) {
-                            database.ref('users/' + dbdestination).on('value', function (snapshot) {
-                                if (snapshot.exists()) {
-                                    dbname = snapshot.val().name;
-                                    dbimage = snapshot.val().image;
-                                    dbemail = snapshot.val().email;
-                                    dbstatus = snapshot.val().status;
-                                    sessionStorage.setItem(dbdestination, JSON.stringify([snapshot.val().name, snapshot.val().image, snapshot.val().email, snapshot.val().status]));
-                                }
-                            });
-
+                            var snapshot = await fetUsData(dbdestination);
+                            dbname = snapshot.val().name;
+                            dbimage = snapshot.val().image;
+                            dbemail = snapshot.val().email;
+                            dbstatus = snapshot.val().status;
+                            sessionStorage.setItem(dbdestination, JSON.stringify([dbname, dbimage, dbemail, dbstatus]));
                         } else {
                             dbname = JSON.parse(sessionStorage.getItem(dbdestination))[0];
                             dbimage = JSON.parse(sessionStorage.getItem(dbdestination))[1];
@@ -89,8 +91,8 @@ function loadIndex() {
             } else {
                 deletee();
             }
-        }, function (transaction, err) {
-            db.transaction(function (transaction) {
+        }, async function (transaction, err) {
+            db.transaction(async function (transaction) {
                 var sql = "CREATE TABLE items " +
                     "(chatId INT NOT NULL," +
                     "origin VARCHAR(25) NOT NULL," +
@@ -106,10 +108,10 @@ function loadIndex() {
         })
     })
 }
-function setter() {
+async function setter() {
     deletee();
 }
-function deletee() {
+async function deletee() {
     db.transaction(function (transaction) {
         var sql = "DROP TABLE items";
         transaction.executeSql(sql, undefined, function () {

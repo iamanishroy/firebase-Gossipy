@@ -1,18 +1,19 @@
 function changeName() {
     var yourName = prompt("Enter your name if you want to change??");
     yourName = yourName.trim();
-    userName = yourName;
-    $('.personName').text(yourName);
-    $('#name').text(yourName);
-    var user = firebase.auth().currentUser;
-    user.updateProfile({
-        displayName: yourName
-    }).then(function () {
-        firebase.database().ref('users/' + user.uid).update({
-            name: yourName, fl: yourName.charAt(0).toLowerCase()
-        });
-    }).catch(function (error) { });
-
+    if (yourName != '') {
+        userName = yourName;
+        $('.personName').text(yourName);
+        $('#name').text(yourName);
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+            displayName: yourName
+        }).then(function () {
+            firebase.database().ref('users/' + user.uid).update({
+                name: yourName, fl: yourName.charAt(0).toLowerCase()
+            });
+        }).catch(function (error) { });
+    }
 }
 function saveStatus() {
     if ($('#status').val() != status) {

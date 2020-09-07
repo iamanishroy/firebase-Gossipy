@@ -19,7 +19,7 @@ function signUp() {
                         photoURL: 'assets/assets/images/user2.png',
                     }).then(function () {
                         var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
-                        database.ref('chats/' + user.uid + '/' + uniqId).set({
+                        database.ref('chats/' + uniqId).set({
                             uniqId: uniqId ,org: 'gossipy', dest: user.uid, type: 1, data: 'Welcome to Gossipy', time: +new Date()
                         }).then(function () {
                             alert("Your Account is Successfully Created!! Have Fun!! :-)");

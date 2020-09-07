@@ -8,6 +8,7 @@ firebase.auth().onAuthStateChanged(function (user) {
             userimg = user.photoURL;
             $('#userImgChanged').attr('src', userimg);
             $('.personName').text(userName);
+            sessionStorage.clear();
             setter();
             $('#imgTrigger').attr('src', userimg);            
             $('#name').text(userName);
