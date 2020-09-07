@@ -46,7 +46,7 @@ function resend() {
         SecureToken: '119525f6-af80-4e4c-9e85-8245cad29b62',
         From: 'verify.gossipy@gmail.com',
         To: email,
-        Subject: 'mimify Email Verification',
+        Subject: 'Gossipy Email Verification',
         Body: 'Your 6-digit pin is - ' + pin
     }).then(
         message => {
