@@ -28,7 +28,6 @@ $('#searchbox').keyup(function () {
             })
         } else {
             $('.searchList').html("");
-            console.log(searchedUser)
             for (var i = 0; i < searchedUser.length; i++) {
                 if ((((searchedUser[i]['name']).toLowerCase())).includes(val.toLowerCase())) {
                     var append = `

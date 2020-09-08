@@ -16,13 +16,13 @@ $(document).ready(function(){
         var currentStyle = $(this).attr('maintheme');
         localStorage.setItem('wchat_maintheme', currentStyle);
         //createCookie("wchat_maintheme",currentStyle,30);
-        $('#maintheme').attr({href: 'assets/css/'+currentStyle+'.css'})
+        $('#maintheme').attr({href: 'assets/assets/css/'+currentStyle+'.css'})
     });
 
     var currentTheme = localStorage.wchat_maintheme;
     if(currentTheme)
     {
-        $('#maintheme').attr({href: 'assets/css/'+currentTheme+'.css'});
+        $('#maintheme').attr({href: 'assets/assets/css/'+currentTheme+'.css'});
         $('#mainthemecolors li a').removeClass('working');
         $( 'a[ maintheme=' + currentTheme + ']' ).addClass( 'working' );
     }
@@ -39,7 +39,7 @@ $(document).ready(function(){
         var currentStyle = $(this).attr('theme');
         localStorage.setItem('wchat_themecolor', currentStyle);
         //createCookie("wchat_themecolor",currentStyle,30);
-        $('#theme').attr({href: 'frontEnd/assets/css/colors/'+currentStyle+'.css'})
+        $('#theme').attr({href: 'assets/assets/css/colors/'+currentStyle+'.css'})
     });
 
     //var currentTheme = readCookie('wchat_themecolor');
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     if(currentTheme)
     {
-        $('#theme').attr({href: 'frontEnd/assets/css/colors/'+currentTheme+'.css'});
+        $('#theme').attr({href: 'assets/assets/css/colors/'+currentTheme+'.css'});
         $('#themecolors li a').removeClass('working');
         $( 'a[ theme=' + currentTheme + ']' ).addClass( 'working' );
     }
