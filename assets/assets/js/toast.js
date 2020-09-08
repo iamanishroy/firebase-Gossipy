@@ -1,8 +1,8 @@
-function ShowToast(name) {
+function ShowToast(data) {
 	var sToast = document.getElementById('toast_container');
 	sToast.setAttribute('style', 'visibility:visible; animation:animation_toast 3s linear 1;');
 	var mToast = document.getElementById('toast_message');
-	mToast.innerHTML = "Hi message sent to " + name;
+	mToast.innerHTML = data;
 	setTimeout(HideToast, 3000);
 }
 function HideToast() {

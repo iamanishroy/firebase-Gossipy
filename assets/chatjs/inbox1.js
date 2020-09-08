@@ -19,6 +19,7 @@ function chatWith(chatuser, toid, img, status, chatuserId, mail, stat) {
     curName = chatuser;
     curNo = toid;
     boxSetter(chatuser, toid, chatuserId);
+    dispBlock(curId);
     $('.curImg').attr("src", img);
     $('.curName').text(chatuser);
     if ($("#pane-intro").css('visibility') == 'visible') {
@@ -99,23 +100,29 @@ function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, s
             $(".target-emoji").css({ 'display': 'none' });
             $('.wchat-filler').css({ 'height': 0 + 'px' });
             scrollDown();
-            var database = firebase.database();
-            var user = firebase.auth().currentUser;
-            var now = +new Date();
-            var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
-            insert(uniqId + "", user.uid + "", curId, 1, message + "", now + "");
-            if (sSwitch) {
-                sentmp3.play();
-            }
-            $.ajax({
-                url: "https://gossipx-server-1.ml/pusher/pusher.php",
-                type: "POST",
-                data: { uniqId: uniqId, to: curId, org: user.uid, type: 1, message: message, time: now },
-                success: function (data) {
-                    database.ref('chats/' + uniqId).set({
-                        uniqId: uniqId, org: user.uid, dest: curId, type: 1, data: message, time: now
-                    });
-                }
+            firebase.firestore().collection("user").where("id", "==", curId).get().then(function (snap) {
+                snap.forEach(function (snapshot) {
+                    if (!snapshot.data()['blocked'].includes(userId)) {
+                        var database = firebase.database();
+                        var user = firebase.auth().currentUser;
+                        var now = +new Date();
+                        var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
+                        insert(uniqId + "", user.uid + "", curId, 1, message + "", now + "");
+                        if (sSwitch) {
+                            sentmp3.play();
+                        }
+                        $.ajax({
+                            url: "https://gossipx-server-1.ml/pusher/pusher.php",
+                            type: "POST",
+                            data: { uniqId: uniqId, to: curId, org: user.uid, type: 1, message: message, time: now },
+                            success: function (data) {
+                                database.ref('chats/' + uniqId).set({
+                                    uniqId: uniqId, org: user.uid, dest: curId, type: 1, data: message, time: now
+                                });
+                            }
+                        });
+                    }
+                })
             });
         }
         return false;
@@ -130,6 +137,13 @@ function checkChatBoxInputKey(event, chatboxtextarea, chatboxtitle, toid, img, s
             $(chatboxtextarea).css('height', adjustedHeight + 8 + 'px');
     } else {
         $(chatboxtextarea).css('overflow', 'auto');
+    }
+}
+function dispBlock(c){
+    if(userBlockList.includes(c)){
+        $('#usBlock').html('<i class="icon-close"></i> Unblock User');
+    }else{
+        $('#usBlock').html('<i class="icon-close"></i> Block User');
     }
 }
 function clickTosendMessage(chatboxtitle, toid, img) {

@@ -12,13 +12,13 @@ function changeName() {
             firebase.firestore().collection("user").doc(user.uid).update({
                 fl:  yourName.charAt(0).toLowerCase(), name: yourName
             });
-        }).catch(function (error) { });
+        });
     }
 }
 function saveStatus() {
     if ($('#status').val() != status) {
         var user = firebase.auth().currentUser;
-        var status = $('#status').val().trim();
+        var status = $('#status').val().trim().replace(/\n/g, ' ');
         $('#status').text(status);
         $('#wchat').show();
         $('#userEdit').hide();

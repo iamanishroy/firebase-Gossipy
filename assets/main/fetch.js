@@ -12,22 +12,24 @@ function fillTable() {
             });
         });
     });
-    
+
     setTimeout(function () {
         db.transaction(function (transaction) {
             transaction.executeSql('DELETE FROM items', undefined, function () {
                 chats = chats.sort(function (a, b) {
                     return a.time - b.time;
                 });
-                chats.forEach(function(cur){
-                    insert(cur.uniqId + "", cur.org + "", cur.dest + "", cur.type + "", cur.data + "", cur.time + "");
-                    // console.log(cur.time)
+                chats.forEach(function (cur) {                    
+                    var sql = "INSERT INTO items(chatId, origin, destination, type, data, time) VALUES(?,?,?,?,?,?)";
+                    transaction.executeSql(sql, [cur.uniqId + "", cur.org + "", cur.dest + "", cur.type + "", cur.data + "", cur.time + ""], function () { },
+                        function (transaction, err) {
+                        });
                 });
             }, function (transaction, err) {
                 console.log(err);
             });
         });
-        
+
     }, 1000);
 }
 

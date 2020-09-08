@@ -1,4 +1,5 @@
 var userName, userId, userimg, status, usEmail, uVis = false;
+var userBlockList = new Array();
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         var user = firebase.auth().currentUser;
@@ -16,8 +17,9 @@ firebase.auth().onAuthStateChanged(function (user) {
             $('#userCode').text(usEmail);
             firebase.firestore().collection("user").where("id", "==", user.uid).get()
                 .then(function (snap) {
-                    snap.forEach(function (snapshot){
+                    snap.forEach(function (snapshot) {
                         status = snapshot.data()['status'];
+                        userBlockList = snapshot.data()['blocked'];
                         uVis = snapshot.data()['visibility'];
                         if (uVis) {
                             $('#vis').html('<input type="checkbox" id="visibilityToogle" checked><span class="slider round"></span>');
@@ -43,15 +45,19 @@ firebase.auth().onAuthStateChanged(function (user) {
             });
             var channel = pusher.subscribe('my-channel');
             channel.bind(userId, function (data) {
-                insert(data.uniqId, data.curId, data.userId, data.type, data.message, data.curTime);
-                setTimeout(boxSetter(curName, curNo, curId), 1500);
-                if (sSwitch) {
-                    audiomp3.play();
-                    audioogg.play();
-                } else {
-                    window.navigator.vibrate(300);
-                }
-                setTimeout(scrollDown, 1000);
+                db.transaction(function (transaction) {
+                    var sql = "INSERT INTO items(chatId, origin, destination, type, data, time) VALUES(?,?,?,?,?,?)";
+                    transaction.executeSql(sql, [data.uniqId, data.curId, data.userId, data.type, data.message, data.curTime], function () {
+                        boxSetter(curName, curNo, curId);
+                        if (sSwitch) {
+                            audiomp3.play();
+                            audioogg.play();
+                        } else {
+                            window.navigator.vibrate(300);
+                        }
+                        setTimeout(scrollDown, 200);
+                    });
+                });
             });
         }
     } else {
