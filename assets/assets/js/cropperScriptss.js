@@ -78,7 +78,7 @@ $(document).ready(function () {
                user.updateProfile({
                   photoURL: url
                }).then(function () {
-                  firebase.database().ref('users/' + user.uid).update({
+                  firebase.firestore().collection("user").doc(user.uid).update({
                      image: url
                   });
                }).catch(function (error) { });

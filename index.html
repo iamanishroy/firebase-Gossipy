@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
     <link href="assets/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/assets/css/animate.css" rel="stylesheet">
@@ -262,8 +263,7 @@
                         </div>
                         <div class="chat-body">
                             <div class="chat-main">
-                                <h2 class="chat-title" dir="auto"><span
-                                        class="wchatellips personName curName"></span>
+                                <h2 class="chat-title" dir="auto"><span class="wchatellips personName curName"></span>
                                 </h2>
                             </div>
                             <div class="chat-status wchatellips" id="typing_on">
@@ -312,9 +312,9 @@
                                     <button class="icon dropdown-toggle" data-toggle="dropdown" href="#"><span
                                             class="font-19"><i class="icon icon-options-vertical"></i></span></button>
                                     <ul class="dropdown-menu dropdown-user animated flipInY">
-                                        <li><a onclick="javascript:ShowProfile();"><i
-                                                    class="ti-user"></i> User Profile</a></li>
-                                        <li><a onclick="EmailChat()""><i class="ti-wallet"></i> Email This Chat</a>
+                                        <li><a onclick="javascript:ShowProfile();"><i class="ti-user"></i> User
+                                                Profile</a></li>
+                                        <li><a onclick="EmailChat()""><i class=" ti-wallet"></i> Email This Chat</a>
                                         </li>
                                         <li><a href="javascript:void(0)"><i class="icon-close"></i> Block User</a></li>
                                     </ul>
@@ -6120,6 +6120,11 @@
                     <span class="slider round"></span>
                 </label>
                 <ul>
+                    <li><b>Public Visibility</b></li>
+                </ul>
+                <label class="soundSwitch" id="vis">
+                </label>
+                <ul>
                     <li><b>Layout Options</b></li>
                 </ul>
                 <ul id="mainthemecolors" class="m-t-20">
@@ -6168,6 +6173,15 @@
                 sSwitch = true;
                 audiomp3.play();
                 audioogg.play();
+            }
+        });
+        $('#visibilityToogle').click(function () {
+            if (uVis) {
+                uVis = false;
+                console.log(uVis);
+            } else {
+                uVis = true;
+                console.log(uVis);
             }
         });
         $('#userEditBtn').click(function () {

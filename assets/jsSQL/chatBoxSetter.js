@@ -78,5 +78,4 @@ function boxSetter(name, sno, cid) {
             $(".cbox").html(htm);
         })
     })
-    
 }

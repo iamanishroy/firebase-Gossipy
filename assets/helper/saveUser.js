@@ -9,8 +9,8 @@ function changeName() {
         user.updateProfile({
             displayName: yourName
         }).then(function () {
-            firebase.database().ref('users/' + user.uid).update({
-                name: yourName, fl: yourName.charAt(0).toLowerCase()
+            firebase.firestore().collection("user").doc(user.uid).update({
+                fl:  yourName.charAt(0).toLowerCase(), name: yourName
             });
         }).catch(function (error) { });
     }
@@ -22,7 +22,7 @@ function saveStatus() {
         $('#status').text(status);
         $('#wchat').show();
         $('#userEdit').hide();
-        firebase.database().ref('users/' + user.uid).update({
+        firebase.firestore().collection("user").doc(user.uid).update({
             status: status
         });
     }

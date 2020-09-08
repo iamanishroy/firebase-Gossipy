@@ -2,11 +2,12 @@ var db = openDatabase("itemDB", "1.0", "itemDB", 65535);
 var lastChat;
 var fetUsData = (usId) => {
     return new Promise((resolve, reject) => {
-        firebase.database().ref('users/' + usId).on('value', function (snapshot) {
-            if (snapshot.exists()) {
-                resolve(snapshot);
-            }
-        });
+        firebase.firestore().collection("user").where("id", "==", usId).get()
+            .then(function (snap) {
+                snap.forEach(function (snapshot) {
+                    resolve(snapshot);
+                });
+            });
     });
 }
 async function loadIndex() {
@@ -25,10 +26,10 @@ async function loadIndex() {
                         var dbname, dbimage, dbemail, dbstatus;
                         if (sessionStorage.getItem(dborigin) == null) {
                             var snapshot = await fetUsData(dborigin);
-                            dbname = snapshot.val().name;
-                            dbimage = snapshot.val().image;
-                            dbemail = snapshot.val().email;
-                            dbstatus = snapshot.val().status;
+                            dbname = snapshot.data().name;
+                            dbimage = snapshot.data().image;
+                            dbemail = snapshot.data().email;
+                            dbstatus = snapshot.data().status;
                             sessionStorage.setItem(dborigin, JSON.stringify([dbname, dbimage, dbemail, dbstatus]));
 
                         } else {
@@ -59,10 +60,10 @@ async function loadIndex() {
                         var dbname, dbimage, dbemail, dbstatus;
                         if (sessionStorage.getItem(dbdestination) == null) {
                             var snapshot = await fetUsData(dbdestination);
-                            dbname = snapshot.val().name;
-                            dbimage = snapshot.val().image;
-                            dbemail = snapshot.val().email;
-                            dbstatus = snapshot.val().status;
+                            dbname = snapshot.data().name;
+                            dbimage = snapshot.data().image;
+                            dbemail = snapshot.data().email;
+                            dbstatus = snapshot.data().status;
                             sessionStorage.setItem(dbdestination, JSON.stringify([dbname, dbimage, dbemail, dbstatus]));
                         } else {
                             dbname = JSON.parse(sessionStorage.getItem(dbdestination))[0];
