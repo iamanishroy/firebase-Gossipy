@@ -18,7 +18,7 @@ function chatWith(chatuser, toid, img, status, chatuserId, mail, stat) {
     curImg = img;
     curName = chatuser;
     curNo = toid;
-    $('#curUserToSendImgName').text(curName);
+    $('.curUserToSendImgName').text(curName);
     boxSetter(chatuser, toid, chatuserId);
     dispBlock(curId);
     $('.curImg').attr("src", img);

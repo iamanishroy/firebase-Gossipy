@@ -12,11 +12,11 @@ function signUp() {
                 promise.then(t => {
                     var user = firebase.auth().currentUser;
                     firebase.firestore().collection("user").doc(user.uid).set({
-                        id: user.uid, email: email, fl: email.split('@')[0].charAt(0).toLowerCase(), name: email.split('@')[0], image: 'https://firebasestorage.googleapis.com/v0/b/gossip-c8092.appspot.com/o/user2.png?alt=media&token=0fb3cf08-4336-4721-840e-bb49c2c50dfe', status: '', visibility: true, blocked: []
+                        id: user.uid, email: email, fl: email.split('@')[0].charAt(0).toLowerCase(), name: email.split('@')[0], image: 'https://firebasestorage.googleapis.com/v0/b/gossip-c8092.appspot.com/o/user2.png?alt=media&token=374ff7c9-37ed-4831-ae70-ff11b0e57c6f', status: '', visibility: true, blocked: []
                     }).then(function () {
                         user.updateProfile({
                             displayName: email.split('@')[0],
-                            photoURL: 'https://firebasestorage.googleapis.com/v0/b/gossip-c8092.appspot.com/o/user2.png?alt=media&token=0fb3cf08-4336-4721-840e-bb49c2c50dfe',
+                            photoURL: 'https://firebasestorage.googleapis.com/v0/b/gossip-c8092.appspot.com/o/user2.png?alt=media&token=374ff7c9-37ed-4831-ae70-ff11b0e57c6f',
                         }).then(function () {
                             var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
                             database.ref('chats/' + uniqId).set({

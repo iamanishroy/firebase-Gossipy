@@ -1,18 +1,18 @@
-var vidAllow = true;
-function AlertVidSender() {
-    vidAllow = true;
-    $('#vidWarning').html('');
-    $('#vidSendBtn').removeAttr('disabled');
-    $('#vidSendBtn').removeAttr('style');
+var fileAllow = true;
+function AlertFileSender() {
+    fileAllow = true;
+    $('#fileWarning').html('');
+    $('#fileSendBtn').removeAttr('disabled');
+    $('#fileSendBtn').removeAttr('style');
     $('#wchat').hide();
-    $('#sendVideoDisplay').show();
-    var sizeinbytes = document.getElementById('vidSender').files[0].size;
-    $("#sendVideoDisplayvid").attr('src', URL.createObjectURL(document.getElementById('vidSender').files[0]));
+    $('#sendFileDisplay').show();
+    var sizeinbytes = document.getElementById('fileSender').files[0].size;
+    $('#sendFileDisplayfile').text(document.getElementById('fileSender').files[0].name);
     if ((sizeinbytes / 1024) > 10240) {
-        vidAllow = false;
-        $('#vidWarning').html(`<a class="flex-grow text-red-500 border-b-2 border-red-500 py-2 text-lg px-1">Video size should be less than 10 MB</a>`);
-        $('#vidSendBtn').attr('disabled');
-        $('#vidSendBtn').attr('style', 'background-color: gray;');
+        fileAllow = false;
+        $('#fileWarning').html(`<a class="flex-grow text-red-500 border-b-2 border-red-500 py-2 text-lg px-1">File size should be less than 10 MB</a>`);
+        $('#fileSendBtn').attr('disabled');
+        $('#fileSendBtn').attr('style', 'background-color: gray;');
     }
     var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
     fSize = sizeinbytes;
@@ -21,19 +21,21 @@ function AlertVidSender() {
         fSize /= 1024;
         i++;
     }
-    $('#sendVideoDisplaySize').text((Math.round(fSize * 100) / 100) + ' ' + fSExt[i]);
+    $('#sendFileDisplaySize').text((Math.round(fSize * 100) / 100) + ' ' + fSExt[i]);
 }
-function sendVidCancel() {
+
+function sendFileCancel() {
     $('#wchat').show();
-    $('#sendVideoDisplay').hide();
+    $('#sendFileDisplay').hide();
 }
-function sendVid() {
-    if (vidAllow) {
+
+function sendFile() {
+    if (fileAllow) {
         cbt = curName;
         cuId = curId;
         $('#wchat').show();
-        $('#sendVideoDisplay').hide();
-        const sFile = document.getElementById('vidSender').files[0];
+        $('#sendFileDisplay').hide();
+        const sFile = document.getElementById('fileSender').files[0];
         var curUrl = URL.createObjectURL(sFile);
         var uniqId = String.fromCharCode(Math.floor(Math.random() * 26) + 97) + Math.random().toString(16).slice(2) + Date.now().toString(16).slice(4);
         $("#chatbox_" + cbt).append('<div class="col-xs-12 p-b-10 odd">' +
@@ -43,9 +45,7 @@ function sendVid() {
             '<div class="chat-body">' +
             '<div class="chat-text">' +
             '<h4>You</h4>' +
-            '<p><video controls="" name="media">' +
-            '<source src="' + curUrl + '" type="video/mp4">' +
-            '</video></p>' +
+            '<p><a href="' + curUrl + '" class="download-link" download=""></a></p>' +
             '<b id="stat_' + uniqId + '">sending</b><span class="msg-status msg-' + cbt + '"><i class="fa fa-check"></i></span>' +
             '</div>' +
             '</div>' +
@@ -55,7 +55,7 @@ function sendVid() {
         scrollDown();
         var user = firebase.auth().currentUser;
         var now = +new Date();
-        insert(uniqId + "", user.uid + "", cuId, 1, '<video controls="" name="media"><source src="' + curUrl + '" type="video/mp4"></video>', now + "");
+        insert(uniqId + "", user.uid + "", cuId, 1, '<a href="' + curUrl + '" class="download-link" download=""></a>', now + "");
         firebase.firestore().collection("user").where("id", "==", cuId).get().then(function (snap) {
             snap.forEach(function (snapshot) {
                 if (!snapshot.data()['blocked'].includes(userId)) {
@@ -70,7 +70,7 @@ function sendVid() {
                                 sentmp3.play();
                             }
                             var database = firebase.database();
-                            var msgval = '<video controls="" name="media"><source src="' + url + '" type="video/mp4"></video>';
+                            var msgval = '<a href="' + url + '" class="download-link" download=""></a>';
                             $.ajax({
                                 url: "https://gossipx-server-1.ml/pusher/pusher.php",
                                 type: "POST",

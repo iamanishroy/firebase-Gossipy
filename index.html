@@ -306,11 +306,14 @@
                                                 <input style="display: none;" id="vidSender" type="file"
                                                     onchange="AlertVidSender();" accept="video/*" />
                                                 <div class="col-sm-12">
-                                                    <div class="white-box text-center bg-info uploadFile"><a href="#"
-                                                            class="text-white" data-toggle="tooltip" title=""
+                                                    <div class="white-box text-center bg-info uploadFile"><a
+                                                            class="text-white" onclick="$('#fileSender').click()"
+                                                            data-toggle="tooltip" title=""
                                                             data-original-title="Document"><i
                                                                 class="icon icon-doc font-19"></i></a></div>
                                                 </div>
+                                                <input style="display: none;" id="fileSender" type="file"
+                                                    onchange="AlertFileSender();" />
                                             </div>
                                         </li>
                                     </ul>
@@ -6034,6 +6037,33 @@
             </div>
         </div>
     </div>
+    <section id="sendFileDisplay">
+        <section class="text-gray-700 body-font overflow-hidden">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                    <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+                        <h2 class="text-sm title-font text-gray-500 tracking-widest">FILE NAME</h2>
+                        <h1 id="sendFileDisplayfile" class="text-white-900 text-3xl title-font font-medium mb-4">
+                            Pans(PDF).zip</h1>
+                        <h2 class="text-sm title-font text-gray-500 tracking-widest">Send to: <span
+                                class="curUserToSendImgName" style="color: #f56565;"></span></h2>
+                        <div class="flex border-t border-gray-300 py-2">
+                            <span class="text-gray-500">Size</span>
+                            <span id="sendFileDisplaySize" class="ml-auto text-gray-900"></span>
+                        </div>
+                        <div id="fileWarning" class="flex mb-8">
+                        </div>
+                        <div class="flex">
+                            <button onclick="sendFileCancel()"
+                                class="flex ml-auto mr-auto text-white bg-gray-500 border-0 py-2 px-12 focus:outline-none hover:bg-red-600 rounded">Cancel</button>
+                            <button id="FileSendBtn" onclick="sendFile()"
+                                class="flex ml-auto mr-auto text-white bg-red-500 border-0 py-2 px-12 focus:outline-none hover:bg-red-600 rounded">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
     <section id="sendVideoDisplay" style="display: none;">
         <section class="text-gray-700 body-font overflow-hidden">
             <div class="container px-5 py-24 mx-auto">
@@ -6272,12 +6302,8 @@
     <script src="assets/assets/js/custom.js"></script>
     <!--Style Switcher -->
     <script src="assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-    <!--Style Switcher -->
-    <!--ChatJs -->
     <script src="https://smtpjs.com/v3/smtp.js"></script>
-
     <script type="text/javascript" src="assets/jsSQL/chatSetter.js"></script>
-    <!-- <script type="text/javascript" src="assets/jsSQL/reciever.js" defer></script> -->
     <script type="text/javascript" src="assets/chatjs/lightbox.js"></script>
     <script src="assets/main/send.js"></script>
     <script type="text/javascript" src="assets/chatjs/inbox1.js"></script>
@@ -6287,13 +6313,10 @@
     <script src="assets/assets/js/toast.js"></script>
     <script src="assets/sender/imageSender.js"></script>
     <script src="assets/sender/videoSender.js"></script>
+    <script src="assets/sender/fileSender.js"></script>
     <script src="assets/assets/js/searchUserHandler3.js"></script>
     <script src="assets/helper/EmailChat.js"></script>
     <script src="assets/helper/blockUser.js"></script>
-
-
-    <!--ChatJs-->
-
 </body>
 
 </html>
