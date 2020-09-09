@@ -34,7 +34,7 @@ $(document).ready(function () {
             '<div class="user-bg">' +
             '<div class="overlay-box">' +
             '<div class="user-content"> <a href="javascript:void(0)">' +
-            '<img class="thumb-lg img-circle" src="' + img + '"></a>' +
+            '<img class="thumb-lg img-circle" style="margin: auto;" src="' + img + '"></a>' +
             '<h4 class="text-white">' + usname + '</h4>' +
             '<h5 class="text-white">' + id + '</h5>' +
             '</div>' +
