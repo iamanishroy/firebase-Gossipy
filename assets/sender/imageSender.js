@@ -59,6 +59,10 @@ function sendImg() {
 
                 task.then(snapshot => snapshot.ref.getDownloadURL())
                     .then(url => {
+                        $('#stat_' + uniqId).text('Sent');
+                        if (sSwitch) {
+                            sentmp3.play();
+                        }
                         var database = firebase.database();
                         var msgval = '<a url="' + url + '" onclick="trigq(this)"><img src="' + url + '" class="userfiles"></a>';
                         $.ajax({
@@ -71,18 +75,10 @@ function sendImg() {
                                 });
                             }
                         });
-
-                    }).catch(console.error);
-                var sen = true;
+                    });
                 task.on('state_changed', function progress(snapshot) {
-                    if (sen) {
-                        sen = false;
-                    } else {
-                        $('#stat_' + uniqId).text('Sent');
-                        if (sSwitch) {
-                            sentmp3.play();
-                        }
-                    }
+                    var progress = Math.round(100.0 * (snapshot.bytesTransferred / snapshot.totalBytes));
+                     $('#stat_' + uniqId).text('sending ' + progress + '% done');
                 });
             }
         });
