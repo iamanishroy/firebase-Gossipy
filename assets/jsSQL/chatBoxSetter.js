@@ -48,6 +48,10 @@ function boxSetter(name, sno, cid) {
                                         </div>
                                     </div>
                                 </div>`;
+                                /*<a url="storage/user_files/image-chat.jpg"
+                                onclick="trigq(this)"><img
+                                src="storage/user_files/image-chat.jpg"
+                                class="userfiles"></a>*/
                     } else {
                         htm += `<div class="col-xs-12 p-b-10 odd">
                                     <div class="chat-image  profile-picture max-profile-picture">

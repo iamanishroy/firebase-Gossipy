@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f56565" />
     <link rel="icon" type="image/png" sizes="16x16" href="assets/assets/images/icon.ico">
     <title>Gossipy</title>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
@@ -13,6 +14,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link href="assets/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/assets/css/animate.css" rel="stylesheet">
     <link href="assets/assets/css/custom.css" rel="stylesheet" id="style">
@@ -288,10 +290,12 @@
                                                 <div class="col-sm-12">
                                                     <div class="white-box text-center bg-purple uploadFile"
                                                         id="uploadFile"><a href="#" class="text-white"
-                                                            data-toggle="tooltip" title=""
-                                                            data-original-title="Photos"><i
+                                                            onclick="$('#imgSender').click()" data-toggle="tooltip"
+                                                            title="" data-original-title="Photos"><i
                                                                 class="icon ti-gallery font-19"></i></a></div>
                                                 </div>
+                                                <input style="display: none;" id="imgSender" type="file"
+                                                    onchange="AlertImgSender();" accept="image/*" />
                                                 <div class="col-sm-12">
                                                     <div class="white-box text-center bg-success uploadFile"><a href="#"
                                                             class="text-white" data-toggle="tooltip" title=""
@@ -316,7 +320,8 @@
                                                 Profile</a></li>
                                         <li><a onclick="EmailChat()""><i class=" ti-wallet"></i> Email This Chat</a>
                                         </li>
-                                        <li><a id="usBlock" onclick="blockUser()"><i class="icon-close"></i> Block User</a></li>
+                                        <li><a id="usBlock" onclick="blockUser()"><i class="icon-close"></i> Block
+                                                User</a></li>
                                     </ul>
                                     <!-- /.dropdown-user -->
                                 </div>
@@ -326,7 +331,8 @@
                         </div>
                     </header>
 
-                    <div class="wchat-body wchat-chat-tile-container" style="background-size: cover;">
+                    <div class="wchat-body wchat-chat-tile-container" id="hideWhileSend"
+                        style="background-size: cover;">
                         <div>
                             <span>
                                 <div class="scroll-down"
@@ -339,14 +345,11 @@
                                 <div class="message-list">
                                     <div class="chat-list cbox" id="resultchat">
                                         <!--Here content comes dynamically-->
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="wchat-filler" style="height: 0px;"></div>
                     <footer tabindex="-1" class="wchat-footer wchat-chat-footer">
                         <div id="chatFrom">
@@ -6028,6 +6031,33 @@
             </div>
         </div>
     </div>
+    <section id="sendImageDisplay" style="display: none;">
+        <section class="text-gray-700 body-font overflow-hidden">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                    <img alt="ecommerce" id="sendImageDisplayimg"
+                        class="lg:w-1/2 w-full lg:h-auto h-auto object-cover object-center rounded">
+                    <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+                        <h2 class="text-sm title-font text-gray-500 tracking-widest">Send to: <span
+                                id="curUserToSendImgName" style="color: #f56565;">Anish</span></h2>
+                        <div class="flex border-t border-gray-300 py-2">
+                            <span class="text-gray-500">Size</span>
+                            <span id="sendImageDisplaySize" class="ml-auto text-gray-900"></span>
+                        </div>
+                        <div id="warning" class="flex mb-8">
+                        </div>
+                        <div class="flex">
+                            <button id="imgSendBtn" onclick="sendImgCancel()"
+                                class="flex ml-auto mr-auto text-white bg-gray-500 border-0 py-2 px-12 focus:outline-none hover:bg-red-600 rounded">Cancel</button>
+                            <button id="imgSendBtn" onclick="sendImg()"
+                                class="flex ml-auto mr-auto text-white bg-red-500 border-0 py-2 px-12 focus:outline-none hover:bg-red-600 rounded">Send</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
     <div id="userEdit" style="background-color: #fff; display: none;">
         <section class="text-gray-700 body-font relative hideWhenCropping">
             <div class="container px-5 py-24 mx-auto">
@@ -6226,6 +6256,7 @@
     <script type="text/javascript" src="assets/assets/js/croppie.min.js"></script>
     <script type="text/javascript" src="assets/assets/js/cropperScriptss.js"></script>
     <script src="assets/assets/js/toast.js"></script>
+    <script src="assets/sender/imageSender.js"></script>
     <script src="assets/assets/js/searchUserHandler3.js"></script>
     <script src="assets/helper/EmailChat.js"></script>
     <script src="assets/helper/blockUser.js"></script>
