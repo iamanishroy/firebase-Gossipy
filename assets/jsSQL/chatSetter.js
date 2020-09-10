@@ -1,4 +1,5 @@
 var db = openDatabase("itemDB", "1.0", "itemDB", 65535);
+var on = true;
 var lastChat;
 var fetUsData = (usId) => {
     return new Promise((resolve, reject) => {
@@ -46,13 +47,24 @@ async function loadIndex() {
                                             src="${dbimage}" alt="${dbname}"
                                             class="avatar-image is-loaded bg-theme" width="100%"></span>
                                     <span>
-                                    <span class="bname personName">${dbname}</span>
-                                    <span class="personStatus"><span class="time Online"></span></span>
+                                    <span class="bname personName">${dbname}</span>`;
+                        if (sessionStorage.getItem('ON__' + dborigin) == 'online') {
+                            htm += `<span class="personStatus"><span class="time Online">&nbsp;&nbsp;&nbsp;<i
+                                    class="fa fa-circle" aria-hidden="true"></i></span></span>
                                     <span class="count"></span><br>
-                                    <small class="preview"></small>
+                                    <small class="preview">Online</small>
                                     </span>
                                 </a>
                             </li>`;
+                        } else {
+                            htm += `<span class="personStatus"><span class="time Offline">&nbsp;&nbsp;&nbsp;<i
+                                    class="fa fa-circle" aria-hidden="true"></i></span></span>
+                                    <span class="count"></span><br>
+                                    <small class="preview">${sessionStorage.getItem('ON__' + dborigin)}</small>
+                                    </span>
+                                </a>
+                            </li>`;
+                        }
                         $(".clist").append(htm);
                     }
                     if (userId == dborigin && !(listed.includes(dbdestination))) {
@@ -79,15 +91,30 @@ async function loadIndex() {
                                             src="${dbimage}" alt="${dbname}"
                                             class="avatar-image is-loaded bg-theme" width="100%"></span>
                                     <span>
-                                    <span class="bname personName">${dbname}</span>
-                                    <span class="personStatus"><span class="time Online"></span></span>
-                                    <span class="count"></span><br>
-                                    <small class="preview"></small>
+                                    <span class="bname personName">${dbname}</span>`;
+                        if (sessionStorage.getItem('ON__' + dbdestination) == 'online') {
+                            htm += `<span class="personStatus"><span class="time Online">&nbsp;&nbsp;&nbsp;<i
+                                         class="fa fa-circle" aria-hidden="true"></i></span></span>
+                                         <span class="count"></span><br>
+                                    <small class="preview">Online</small>
                                     </span>
                                 </a>
                             </li>`;
+                        } else {
+                            htm += `<span class="personStatus"><span class="time Offline">&nbsp;&nbsp;&nbsp;<i
+                                    class="fa fa-circle" aria-hidden="true"></i></span></span>
+                                    <span class="count"></span><br>
+                                    <small class="preview">${sessionStorage.getItem('ON__' + dbdestination)}</small>
+                                    </span>
+                                </a>
+                            </li>`;
+                        }
                         $(".clist").append(htm);
                     }
+                }
+                if (on) {
+                    on = false;
+                    setTimeout(presence, 1500);
                 }
             } else {
                 deletee();

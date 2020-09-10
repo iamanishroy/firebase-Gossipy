@@ -5,6 +5,9 @@ firebase.auth().onAuthStateChanged(function (user) {
         var user = firebase.auth().currentUser;
         if (user != null) {
             userId = user.uid;
+            firebase.database().ref('presence/' + userId).set({
+                online: true, time: +new Date()
+            });
             userName = user.displayName;
             userimg = user.photoURL;
             $('#userImgChanged').attr('src', userimg);

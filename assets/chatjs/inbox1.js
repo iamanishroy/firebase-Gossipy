@@ -23,6 +23,9 @@ function chatWith(chatuser, toid, img, status, chatuserId, mail, stat) {
     dispBlock(curId);
     $('.curImg').attr("src", img);
     $('.curName').text(chatuser);
+    setInterval(function(){
+        $('#typing_on').text(sessionStorage.getItem('ON__' + curId));
+    }, 1000);
     if ($("#pane-intro").css('visibility') == 'visible') {
         $("#pane-intro").css({ 'visibility': 'hidden' });
         $(".chat-right-aside").css({ 'visibility': 'visible' });
