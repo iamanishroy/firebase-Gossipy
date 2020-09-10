@@ -1,5 +1,6 @@
-function verifyEmail(email) {
+function verifyEmail() {
     var email = $('#email').val();
+    $('#changeBtnOnClick').text('Verifying...');
     var pin = Math.floor(100000 + Math.random() * 900000);
     var database = firebase.database();
     var unique_email = true;
