@@ -36,6 +36,6 @@ function presence() {
 }
 $(window).unload(function () {
     firebase.database().ref('presence/' + userId).set({
-        online: st, time: +new Date()
+        online: false, time: +new Date()
     });
 });
