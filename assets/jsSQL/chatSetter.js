@@ -48,7 +48,7 @@ async function loadIndex() {
                                             class="avatar-image is-loaded bg-theme" width="100%"></span>
                                     <span>
                                     <span class="bname personName">${dbname}</span>`;
-                        if (sessionStorage.getItem('ON__' + dborigin) == 'online') {
+                        if (sessionStorage.getItem('ON__' + dborigin) == 'online' || sessionStorage.getItem('ON__' + dborigin) == 'Online always') {
                             htm += `<span class="personStatus"><span class="time Online">&nbsp;&nbsp;&nbsp;<i
                                     class="fa fa-circle" aria-hidden="true"></i></span></span>
                                     <span class="count"></span><br>
@@ -92,7 +92,7 @@ async function loadIndex() {
                                             class="avatar-image is-loaded bg-theme" width="100%"></span>
                                     <span>
                                     <span class="bname personName">${dbname}</span>`;
-                        if (sessionStorage.getItem('ON__' + dbdestination) == 'online') {
+                        if (sessionStorage.getItem('ON__' + dbdestination) == 'online' || sessionStorage.getItem('ON__' + dbdestination) == 'Online always') {
                             htm += `<span class="personStatus"><span class="time Online">&nbsp;&nbsp;&nbsp;<i
                                          class="fa fa-circle" aria-hidden="true"></i></span></span>
                                          <span class="count"></span><br>
