@@ -1,15 +1,11 @@
-
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyD67SLKfvdAfvxWYXUdZDImTRrAfw7mm7s",
-    authDomain: "gossip-c8092.firebaseapp.com",
-    databaseURL: "https://gossip-c8092.firebaseio.com",
-    projectId: "gossip-c8092",
-    storageBucket: "gossip-c8092.appspot.com",
-    messagingSenderId: "35104739229",
-    appId: "1:35104739229:web:634b78dcd933a4a971a974",
-    measurementId: "G-ZTNCFDSJX5"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  // firebase.analytics();
+var firebaseConfig = {
+  apiKey: "AIzaSyC_tyES4_CKUApO9jND-gW2chFk57WlKbQ",
+  authDomain: "chatter-box-714f8.firebaseapp.com",
+  databaseURL: "https://chatter-box-714f8-default-rtdb.firebaseio.com",
+  projectId: "chatter-box-714f8",
+  storageBucket: "chatter-box-714f8.appspot.com",
+  messagingSenderId: "284457489486",
+  appId: "1:284457489486:web:f68534b383333368549f1f",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
